@@ -142,6 +142,8 @@
       border-left: 1px solid #d5dbe3;
     }
 
+    .chain-a { margin-bottom: 80px; }
+
     #checkout-title {
       margin: 0;
       font-size: 20px;
@@ -247,6 +249,114 @@
       <h2 class="case-label">Duplicate tokens</h2>
       <p class="case-note">The same class is written twice.</p>
       <button type="button" class="dup dup keep" data-case="duplicate-tokens">Duplicate tokens</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Three classes together</h2>
+      <p class="case-note">Each pair of classes is shared. Only one element has all three.</p>
+      <div class="cluster">
+        <span class="oak pine decoy">Oak pine</span>
+        <span class="pine cedar decoy">Pine cedar</span>
+        <span class="cedar oak decoy">Cedar oak</span>
+        <span class="oak pine cedar" data-case="class-join">Oak pine cedar</span>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Data attribute</h2>
+      <p class="case-note">No id or class. A short data attribute is the selector.</p>
+      <button type="button" data-qa="go" data-case="data-attribute">Go</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Two data attributes</h2>
+      <p class="case-note">Each attribute is shared. Only one element has both.</p>
+      <div class="cluster">
+        <span class="decoy" data-k="a">Key only</span>
+        <span class="decoy" data-v="b">Value only</span>
+        <button type="button" data-k="a" data-v="b" data-case="paired-attrs">Both</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Dotted class</h2>
+      <p class="case-note">The class name itself contains a dot, so the selector has to escape it.</p>
+      <button type="button" class="price.tag" data-case="escaped-class">Price tag</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Digit-leading class</h2>
+      <p class="case-note">The class starts with a number.</p>
+      <button type="button" class="4up" data-case="digit-class">4 up</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Position</h2>
+      <p class="case-note">Three paragraphs with no classes. Select the second.</p>
+      <div id="notes">
+        <p>First note</p>
+        <p data-case="nth-paragraph">Second note</p>
+        <p>Third note</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Hashed id</h2>
+      <p class="case-note">The id has a stable word plus a hash. A second button sits beside it.</p>
+      <div id="menu-box" class="cluster">
+        <button type="button" id="Sidebar-a1b2c3" data-case="partial-id">Sidebar</button>
+        <button type="button">Other</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Hashed class</h2>
+      <p class="case-note">Both buttons share one hashed class, so the selector keeps the stable prefix.</p>
+      <div id="menu-list" class="cluster">
+        <button type="button" class="MenuItem-a1b2c3" data-case="partial-class">First item</button>
+        <button type="button" class="MenuItem-a1b2c3">Second item</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Class rank</h2>
+      <p class="case-note">A plain class is shared. The hyphenated class is the one that is unique.</p>
+      <div class="cluster">
+        <span class="label decoy">Label</span>
+        <button type="button" class="label save-draft" data-case="ranked-class">Save draft</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Ten class cap</h2>
+      <p class="case-note">Eleven classes. The last one is unique, but only the first ten are considered.</p>
+      <div id="cap-box" class="cluster">
+        <button type="button" class="aa bb cc dd ee ff gg hh ii jj uniquemark" data-case="class-cap">Capped</button>
+        <button type="button" class="aa bb cc dd ee ff gg hh ii jj">Same ten</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Ignored attributes</h2>
+      <p class="case-note">data-user-id and data-token are unique here, and should still be left out.</p>
+      <div id="secret">
+        <button type="button" data-user-id="ab" data-token="xy" data-case="excluded-attrs">Private</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Shared class, deep nest</h2>
+      <p class="case-note">The same class sits at the bottom of two branches. The ancestor has to tell them apart.</p>
+      <div class="chain-a">
+        <div><div><div><div><div>
+          <button type="button" class="leaf" data-case="relaxed-deep-a">Leaf A</button>
+        </div></div></div></div></div>
+      </div>
+      <div class="chain-b">
+        <div><div><div><div><div>
+          <button type="button" class="leaf" data-case="relaxed-deep-b">Leaf B</button>
+        </div></div></div></div></div>
+      </div>
     </section>
 
     <section class="case-block">
