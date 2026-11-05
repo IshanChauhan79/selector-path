@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Selector path cases</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1c2430;
+      --muted: #5c6778;
+      --line: #d5dbe3;
+      --paper: #f3f5f8;
+      --card: #fff;
+      --accent: #1f4b99;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
+    }
+
+    header,
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 28px 88px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    footer { padding-top: 28px; }
+
+    .masthead-title,
+    .mastfoot-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .mastfoot-title { font-size: 14px; font-weight: 500; color: #c5ceda; }
+
+    main {
+      width: min(760px, calc(100% - 32px));
+      margin: -56px auto 48px;
+    }
+
+    .intro {
+      margin-bottom: 28px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+    }
+
+    .intro h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .intro p { margin: 0; color: var(--muted); }
+
+    .case-block {
+      margin: 0 0 72px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+    }
+
+    .case-label {
+      margin: 0 0 4px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .case-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    button,
+    .decoy,
+    .swatch {
+      font: 600 14px/1.2 inherit;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f7f8fa;
+      color: var(--ink);
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .decoy,
+    .swatch { cursor: default; }
+
+    .cluster { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    .swatch { background: #f3e8e8; }
+
+    [data-case] {
+      display: inline-block;
+      border: 2px solid var(--accent);
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 1px 2px rgba(28, 36, 48, 0.08);
+      cursor: pointer;
+    }
+
+    [data-case]:hover { background: #f4f7fd; }
+
+    header [data-case],
+    footer [data-case] {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .twins { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .nest {
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f7f8fa;
+    }
+
+    .level {
+      margin-left: 4px;
+      padding-left: 7px;
+      border-left: 1px solid #d5dbe3;
+    }
+
+    #checkout-title {
+      margin: 0;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <p class="masthead-title">Northwind</p>
+    <button type="button" class="banner" data-case="landmark-header">Header banner</button>
+  </header>
+  <main id="app">
+    <div class="intro">
+      <h1>Selector path cases</h1>
+      <p>Outlined controls are the ones to select. The other chips are lookalikes that share a class, so the selector has to tell them apart.</p>
+    </div>
+
+    <section class="case-block">
+      <h2 class="case-label">Unique class</h2>
+      <p class="case-note">This class appears once on the page.</p>
+      <button type="button" class="only-save" data-case="unique-class">Only save</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Tag and class</h2>
+      <p class="case-note">The same class is on a span and a button. Select the button.</p>
+      <div class="cluster">
+        <span class="shared-label decoy">Shared</span>
+        <button type="button" class="shared-label" data-case="tag-class">Shared</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Class pair</h2>
+      <p class="case-note">Alpha and beta are common. Only one element has both.</p>
+      <div class="cluster">
+        <span class="alpha decoy">Alpha</span>
+        <span class="beta decoy">Beta</span>
+        <span class="alpha beta" data-case="class-pair">Alpha beta</span>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Tag and class pair</h2>
+      <p class="case-note">Red and blue appear on a box and a button. Select the button that has both.</p>
+      <div class="cluster">
+        <button type="button" class="red">Red</button>
+        <button type="button" class="blue">Blue</button>
+        <div class="red blue swatch">Red blue box</div>
+        <button type="button" class="red blue" data-case="tag-class-pair">Red blue</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Many classes</h2>
+      <p class="case-note">Sixteen classes, including a hashed token and a dynamic token. The stable class is the one to keep.</p>
+      <div class="cluster">
+        <div class="card tile block panel media item slot unit row decoy">Shared classes</div>
+        <button type="button"
+          class="bundle card tile block panel media item slot unit row item-row grid2 9col xK9mQ2pL foo.bar item_12345"
+          data-case="fifteen-classes">Bundle</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Same tag siblings</h2>
+      <p class="case-note">Five identical buttons. Select the third.</p>
+      <div class="twins">
+        <button type="button" class="twin">Twin 1</button>
+        <button type="button" class="twin">Twin 2</button>
+        <button type="button" class="twin" data-case="same-tag-siblings">Twin 3</button>
+        <button type="button" class="twin">Twin 4</button>
+        <button type="button" class="twin">Twin 5</button>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Stable id</h2>
+      <p class="case-note">An id that can be used as the selector.</p>
+      <h2 id="checkout-title" data-case="unique-id">Checkout</h2>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Widget id</h2>
+      <p class="case-note">A widget id is still a real id.</p>
+      <div id="vwo-widget-42_99" data-case="widget-id">Widget</div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Dynamic id</h2>
+      <p class="case-note">This id looks generated. The selector should not be the id itself.</p>
+      <div id="panel_12345" data-case="dynamic-id">Dynamic panel</div>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Odd class tokens</h2>
+      <p class="case-note">A digit-leading class, a dotted class, and a hover-like class sit next to a normal one.</p>
+      <button type="button" class="9col foo.bar btn:hover plain" data-case="digit-and-odd-classes">Plain</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Duplicate tokens</h2>
+      <p class="case-note">The same class is written twice.</p>
+      <button type="button" class="dup dup keep" data-case="duplicate-tokens">Duplicate tokens</button>
+    </section>
+
+    <section class="case-block">
+      <h2 class="case-label">Thirty levels deep</h2>
+      <p class="case-note">The target sits at the end of a 30-level nest.</p>
+      <div class="nest">
+        <div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level"><div class="level">
+          <button type="button" class="deep-save" data-case="deep-target">Deep target</button>
+        </div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p class="mastfoot-title">Northwind</p>
+    <button type="button" class="banner" data-case="landmark-footer">Footer banner</button>
+  </footer>
+</body>
+
+</html>
